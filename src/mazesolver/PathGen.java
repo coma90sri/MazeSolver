@@ -1,5 +1,7 @@
 package mazesolver;
 
+import java.util.ArrayList;
+
 public class PathGen {
 	
 	
@@ -274,7 +276,73 @@ public class PathGen {
 		//no path exists
 		return null;
 	}
-	
+	public ArrayList<String> getPathNodes(int[][] data){
+		
+		ArrayList<String> pathcells = new ArrayList<String>();
+		int [][] path= new int[this.m_iRows][this.m_iCols];
+		int[] start=new int[2],end=new int[2],current=new int[2];
+		
+		start[0]=data[0][0];
+		start[1]=data[0][1];
+		
+		end[0]=data[1][0];
+		end[1]=data[1][1];
+		
+		path= FindPath(start[0],start[1],end[0],end[1]);
+		
+		current[0]=start[0];
+		current[1]=start[1];
+		
+		pathcells.add(current[0]+" "+current[1]);
+		path[current[0]][current[1]]=2;
+		
+		
+		while(!((current[0] == end[0]) && (current[1] == end[1]))){
+			
+				
+					if(current[0]-1 >= 0 && path[current[0]-1][current[1]] == iPath){
+						path[current[0]-1][current[1]]=2;
+						current[0]=current[0]-1;
+						current[1]=current[1];
+						pathcells.add(current[0]+" "+current[1]);
+						//System.out.println(current[0]+" "+current[1]);
+					}
+				
+			
+					if(current[0]+1 < m_iRows && path[current[0]+1][current[1]] == iPath){
+						path[current[0]+1][current[1]]=2;
+						current[0]=current[0]+1;
+						current[1]=current[1];
+						pathcells.add(current[0]+" "+current[1]);
+						//System.out.println(current[0]+" "+current[1]);
+					}
+				
+			
+					if(current[1]-1 >= 0 && path[current[0]][current[1]-1] == iPath){
+						path[current[0]][current[1]-1]=2;
+						current[0]=current[0];
+						current[1]=current[1]-1;
+						pathcells.add(current[0]+" "+current[1]);
+						//System.out.println(current[0]+" "+current[1]);
+					}
+				
+				
+					if(current[1]+1 < m_iCols && path[current[0]][current[1]+1] == iPath){
+						path[current[0]][current[1]+1]=2;
+						current[0]=current[0];
+						current[1]=current[1]+1;
+						pathcells.add(current[0]+" "+current[1]);
+						//System.out.println(current[0]+" "+current[1]);
+					}
+				
+				
+			
+			
+		}
+		
+		return pathcells;
+		
+	}
 	
 	public void Testrun(int[][] data){
 		int[] start=new int[2],end=new int[2];

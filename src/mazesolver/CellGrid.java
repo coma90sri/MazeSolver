@@ -42,8 +42,13 @@ public class CellGrid {
 		
 	}
 	public void setCellAs(int row,int col,String celltype) {
-		if(celltype == "wall")
+		if(celltype == "wall"){
 			cellPane[row][col].setAsWall();
+		}else if(celltype == "path"){
+			cellPane[row][col].setAsPath();
+		}else if(celltype == "end"){
+			cellPane[row][col].setAsEnd();
+		}
 	}
 
 	/**

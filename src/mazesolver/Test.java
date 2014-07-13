@@ -1,6 +1,7 @@
 package mazesolver;
 
 import java.awt.BorderLayout;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
@@ -26,41 +27,47 @@ public class Test {
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 
+		//get wall cells
 		String a = in.getcells();
 
 		String[] strnum = a.split(",");
 		int[][] wallcells = new int[strnum.length][2];
 
+		//convert to integer values
 		for (int i = 0; i < strnum.length; i++) {
 			wallcells[i][0] = Integer.parseInt(strnum[i]);
 		}
 
+		//remove the current grid
 		frame.remove(ss);
 		frame.repaint();
-
+		
+		//get wall coordinates
 		wallcells = getCordinates(wallcells, col);
 
+		//add walls
 		ss.AddWall(wallcells);
 
+		//add the changed in grid to frame
 		frame.add(ss);
 		frame.repaint();
-
-		int b = in.getStartingCell();
-		int c = in.getEndCell();
 		
+		//get starting and end cells
 		int[][] startendcells = new int[2][2];
-		startendcells[0][0]=b;
-		startendcells[1][0]=c;
+		startendcells[0][0]=in.getStartingCell();
+		startendcells[1][0]=in.getEndCell();
 		
+		//get coordinates of them
 		startendcells=getCordinates(startendcells, col);
 
+		//create a maze in order to use in PathGen class
 		int[][] maze = new int[row][col];
 
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < col; j++) {
-
+				//add free space here - free space-0
 				maze[i][j] = 0;
-
+				//add walls here - wall - 1
 				for (int k = 0; k < wallcells.length; k++) {
 					if(wallcells[k][0]==i && wallcells[k][1]==j)
 						maze[i][j]=1;
@@ -70,16 +77,42 @@ public class Test {
 
 		}
 
+		//create a pathGen instance
 		PathGen path = new PathGen(maze);
-		path.Testrun(startendcells);
+		
+		//do a test here - just print the solved maze
+		//path.Testrun(startendcells);
 
-		frame.remove(ss);
-		frame.repaint();
+		
+		
 
-		ss.AddWall(wallcells);
+		
 
-		frame.add(ss);
-		frame.repaint();
+		ArrayList<String> pathcells = new ArrayList<String>();
+		pathcells=path.getPathNodes(startendcells);
+		
+		
+		   try {
+			  
+		        for(int i=0;i<pathcells.size();i++){
+		    			String[] aa=pathcells.get(i).split(" ");
+		    			int r=Integer.parseInt(aa[0]);
+		    			int c=Integer.parseInt(aa[1]);
+		    			
+		    			frame.remove(ss);
+			    		frame.repaint();
+		    			ss.AddPathCells(r,c);
+		    			ss.AddEndCell(startendcells[1][0], startendcells[1][1]);
+		    			frame.add(ss);
+			    		frame.repaint();
+			    		
+			            Thread.sleep(1 * 600);
+		    		}
+		    		
+		       
+		    } catch (InterruptedException e) {
+		        e.printStackTrace();
+		    }
 
 	}
 

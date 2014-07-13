@@ -46,7 +46,15 @@ public class Cell extends JPanel {
 			this.setBackground(Color.black);
 		}
 		
+		public void setAsPath(){
+			
+			this.setBackground(Color.green);
+		}
 		
+		public void setAsEnd(){
+			
+			this.setBackground(Color.red);
+		}
 		
 		
 	}

@@ -55,10 +55,19 @@ public class MazeBoard extends JPanel {
 			// System.out.println(row+" "+col);
 			 maze_cells.setCellAs(row+1,col+1,"wall");
 		}
-		
-		
-
 		Init();
 
 	}
+	
+	  public void AddPathCells(int row ,int col){
+		  
+		  maze_cells.setCellAs(row+1,col+1,"path");
+		  Init();
+	  }
+	  
+	  public void AddEndCell(int row ,int col){
+		  
+		  maze_cells.setCellAs(row+1,col+1,"end");
+		  Init();
+	  }
 }
