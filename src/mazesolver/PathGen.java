@@ -16,9 +16,9 @@ public class PathGen {
 	
 	
 
-	/// <summary>
+	
 	/// Constructor 1: takes a 2D integer array
-	/// </summary> 
+	
 	public PathGen(int[][] iMaze)
 	{
 		m_iMaze=iMaze;
@@ -26,10 +26,10 @@ public class PathGen {
 		m_iCols=iMaze[0].length;
 	}
 
-	/// <summary>
-	/// Constructor 2: initializes the dimensions of maze, 
-	/// later, indexers may be used to set individual elements' values
-	/// </summary>
+
+	// Constructor 2: initializes the dimensions of maze, 
+	// later, indexers may be used to set individual elements' values
+	
 	public  PathGen(int iRows, int iCols)
 	{
 		m_iMaze= new int[iRows][iCols];
@@ -37,9 +37,9 @@ public class PathGen {
 		m_iCols=iCols;
 	}
 		
-	/// <summary>
-	/// Properites:
-	/// </summary>
+	
+	// Properties:
+	
 	public int getRows()
 	{
 		 return m_iRows; 
@@ -79,32 +79,32 @@ public class PathGen {
 
 
 
-	/// <summary>
-	/// The function is used to get the contents of a given node in a given maze,
-	///  specified by its node no.
-	/// </summary>
+	
+	//The function is used to get the contents of a given node in a given maze,
+	// specified by its node no.
+	
 	private int GetNodeContents(int[][] iMaze, int iNodeNo)
 	{
 		int iCols=iMaze[0].length;
 		return iMaze[iNodeNo/iCols][iNodeNo-iNodeNo/iCols*iCols];
 	}
 
-	/// <summary>
-	/// The function is used to change the contents of a given node in a given maze,
-	///  specified by its node no.
-	/// </summary>
+	
+	// The function is used to change the contents of a given node in a given maze,
+	// specified by its node no.
+	
 	private void ChangeNodeContents(int[][] iMaze, int iNodeNo, int iNewValue)
 	{
 		int iCols=iMaze[0].length;
 		iMaze[iNodeNo/iCols][iNodeNo-iNodeNo/iCols*iCols]=iNewValue;
 	}
 	
-	/// <summary>
-	/// This public function finds the shortest path between two points
-	/// in the maze and return the solution as an array with the path traced 
-	/// by "iPath" (can be changed using property "PathCharacter")
-	/// if no path exists, the function returns null
-	/// </summary>
+	
+	// This public function finds the shortest path between two points
+	// in the maze and return the solution as an array with the path traced 
+	// by "iPath" (can be changed using property "PathCharacter")
+	// if no path exists, the function returns null
+
 	public int[][] FindPath(int iFromY, int iFromX, int iToY, int iToX)
 	{
 		int iBeginningNode = iFromY*this.m_iCols + iFromX;
@@ -113,11 +113,11 @@ public class PathGen {
 	}
 
 
-	/// <summary>
-	/// Internal function for that finds the shortest path using a technique
-	/// similar to breadth-first search.
-	/// It assigns a node no. to each node(2D array element) and applies the algorithm
-	/// </summary>
+
+	// Internal function for that finds the shortest path using a technique
+	// similar to breadth-first search.
+	// It assigns a node no. to each node(2D array element) and applies the algorithm
+	
 	private enum Status
 	{	Ready,	Waiting,	Processed	}
 	private int[][] Search(int iStart, int iStop)
@@ -276,30 +276,40 @@ public class PathGen {
 		//no path exists
 		return null;
 	}
+	
+	
+	//get path nodes (from starting to end)
 	public ArrayList<String> getPathNodes(int[][] data){
 		
+		//here use a array list - because path nodes cannot be predict
 		ArrayList<String> pathcells = new ArrayList<String>();
 		int [][] path= new int[this.m_iRows][this.m_iCols];
 		int[] start=new int[2],end=new int[2],current=new int[2];
 		
+		//set starting nodes coordinates
 		start[0]=data[0][0];
 		start[1]=data[0][1];
 		
+		//set end nodes coordinates
 		end[0]=data[1][0];
 		end[1]=data[1][1];
 		
+		//find the solved path
 		path= FindPath(start[0],start[1],end[0],end[1]);
 		
+		//set the current cell to start
 		current[0]=start[0];
 		current[1]=start[1];
 		
+		//add starting  cell to array list
 		pathcells.add(current[0]+" "+current[1]);
+		// remove ipath value form current node - avoid getting same node again and again
 		path[current[0]][current[1]]=2;
 		
-		
+		// adding other nodes to array list- finish the loop when current node = ending node
 		while(!((current[0] == end[0]) && (current[1] == end[1]))){
 			
-				
+					//check below node
 					if(current[0]-1 >= 0 && path[current[0]-1][current[1]] == iPath){
 						path[current[0]-1][current[1]]=2;
 						current[0]=current[0]-1;
@@ -308,7 +318,7 @@ public class PathGen {
 						//System.out.println(current[0]+" "+current[1]);
 					}
 				
-			
+					//check above node
 					if(current[0]+1 < m_iRows && path[current[0]+1][current[1]] == iPath){
 						path[current[0]+1][current[1]]=2;
 						current[0]=current[0]+1;
@@ -317,7 +327,7 @@ public class PathGen {
 						//System.out.println(current[0]+" "+current[1]);
 					}
 				
-			
+					//check left node
 					if(current[1]-1 >= 0 && path[current[0]][current[1]-1] == iPath){
 						path[current[0]][current[1]-1]=2;
 						current[0]=current[0];
@@ -326,7 +336,7 @@ public class PathGen {
 						//System.out.println(current[0]+" "+current[1]);
 					}
 				
-				
+					//check right node
 					if(current[1]+1 < m_iCols && path[current[0]][current[1]+1] == iPath){
 						path[current[0]][current[1]+1]=2;
 						current[0]=current[0];
@@ -344,6 +354,8 @@ public class PathGen {
 		
 	}
 	
+	
+	// this is for testing .. just print the solved maze
 	public void Testrun(int[][] data){
 		int[] start=new int[2],end=new int[2];
 		start[0]=data[0][0];

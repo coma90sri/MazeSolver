@@ -7,7 +7,7 @@ public class CellGrid {
 	private  int margin_cells = 1;
 
 	private Cell[][] cellPane;
-
+	//constructor
 	public CellGrid(int row,int col){
 		this.row=row;
 		this.col=col;
@@ -36,11 +36,13 @@ public class CellGrid {
 		}
 
 	}
-
+	
 	public Cell ReturnGridCell(int row,int col){
 		return this.cellPane[row][col];
 		
 	}
+	
+	//set specific cell
 	public void setCellAs(int row,int col,String celltype) {
 		if(celltype == "wall"){
 			cellPane[row][col].setAsWall();

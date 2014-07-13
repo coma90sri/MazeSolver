@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 
 public class Input {
 	
+	//get number of rows from user
 	 public int getRow() {            
 	      String rowStr = JOptionPane.showInputDialog("Enter number of rows needed :");   // Read input String from dialog box
 	      Integer row = Integer.parseInt(rowStr);   
@@ -11,9 +12,10 @@ public class Input {
 	      return row;
 	        }
 	   
+	 //get walls separated by comma
 	   public String getWallcells() {
 		      String rowStr;
-		      	      // Read input String from dialog box
+		      // Read input String from dialog box
 		      rowStr = JOptionPane.showInputDialog("Enter comma separated wall numbers :");
 		      
 		      return rowStr;
@@ -21,7 +23,7 @@ public class Input {
 		   }
 		   
 	   
-	   
+	   // get number of column 
 	   public int getColumn() {
 		      String columnStr = JOptionPane.showInputDialog("Enter number of columns needed :");
 		      Integer column = Integer.parseInt(columnStr);   // Convert String to double
