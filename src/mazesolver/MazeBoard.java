@@ -47,14 +47,13 @@ public class MazeBoard extends JPanel {
 
 	}
 
-	public void AddWall(int[] wallcells) {
+	public void AddWall(int[][] wallcells) {
 		int row,col;
 		for(int i=0;i<wallcells.length;i++){
-			
-			 row= (int)((wallcells[i]-1)/(this.inputRow))+1;
-			 col = ((wallcells[i]-1) % (this.inputRow))+1;
-			 System.out.println(row+" "+col);
-			 maze_cells.setCellAs(row,col,"wall");
+				row=wallcells[i][0];
+				col=wallcells[i][1];
+			// System.out.println(row+" "+col);
+			 maze_cells.setCellAs(row+1,col+1,"wall");
 		}
 		
 		

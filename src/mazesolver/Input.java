@@ -29,5 +29,20 @@ public class Input {
 		      return column;
 		      
 		   }
+	   
+	   public int getStartingCell() {
+		      String StartingCellStr = JOptionPane.showInputDialog("Enter the starting cell :");
+		      Integer StartingCell = Integer.parseInt(StartingCellStr);   // Convert String to double
+		      
+		      return StartingCell;
+		      
+		   }
+	   public int getEndCell() {
+		      String getEndCellStr = JOptionPane.showInputDialog("Enter the ending cell :");
+		      Integer getEndCell = Integer.parseInt(getEndCellStr);   // Convert String to double
+		      
+		      return getEndCell;
+		      
+		   }
 
 }
