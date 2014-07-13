@@ -11,10 +11,10 @@ public class Input {
 	      return row;
 	        }
 	   
-	   public String getcells() {
+	   public String getWallcells() {
 		      String rowStr;
 		      	      // Read input String from dialog box
-		      rowStr = JOptionPane.showInputDialog("Enter cells :");
+		      rowStr = JOptionPane.showInputDialog("Enter comma separated wall numbers :");
 		      
 		      return rowStr;
 		      
